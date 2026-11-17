@@ -31,6 +31,8 @@
     <nav class="main-nav" aria-label="SignAR sections">
       <button class="nav-btn active" data-target="recognizeSection">Recognize</button>
       <button class="nav-btn" data-target="aboutSection">About SignAR</button>
+      <a class="nav-btn" href="./library.html">Sign library</a>
+      <a class="nav-btn" href="https://github.com/SignAR007/SignARr/tree/main/SignAR_FSL_Training_Tools_Video_Import_v5" target="_blank" rel="noopener noreferrer">Training guide</a>
     </nav>
 
     <main>
@@ -124,7 +126,7 @@
           <article class="info-card card"><span class="eyebrow">CURRENT STATUS</span><h2>What is SignAR?</h2><p>SignAR is a browser-based Filipino Sign Language decoder prototype. This development version tracks the signer’s hands, body pose, and selected face landmarks, then normalizes their movement into a temporal model input. It does not claim to decode words reliably until the trained model has been built from verified FSL examples and evaluated with unseen signers.</p></article>
           <article class="info-card card"><span class="eyebrow">DECODER PIPELINE</span><h2>How the prototype works</h2><ul><li><strong>Camera:</strong> captures a local video stream without uploading it.</li><li><strong>MediaPipe Holistic:</strong> tracks hands, body pose, and selected face landmarks.</li><li><strong>Shared normalizer:</strong> converts tracking results into 456 values per sampled frame.</li><li><strong>TensorFlow.js:</strong> loads labels and output dimensions from a compatible, validated model manifest.</li><li><strong>Sentence and voice:</strong> appends predicted signs and speaks the sentence after a short pause.</li></ul><p><strong>Model status:</strong> no validated model is installed; sign predictions are unavailable.</p></article>
           <article class="info-card card"><span class="eyebrow">TARGET USERS</span><h2>Who SignAR supports</h2><ul><li>K–12 and secondary students learning Filipino Sign Language.</li><li>Teachers and educators supporting inclusive classroom communication.</li><li>Deaf students who may benefit when classmates and teachers understand more FSL.</li><li>Schools and institutions promoting accessible and inclusive learning.</li></ul></article>
-          <article class="info-card card"><span class="eyebrow">EDUCATION + SOCIAL RELEVANCE</span><h2>Why it matters</h2><p>The proposal positions SignAR as an interactive learning and awareness tool intended to support inclusive education and reduce communication barriers between Deaf and non-Deaf individuals.</p><div class="sdg-list"><span>SDG 4 · Quality Education</span><span>SDG 10 · Reduced Inequalities</span><span>SDG 9 · Industry, Innovation and Infrastructure</span></div></article>
+          <article class="info-card card"><span class="eyebrow">EDUCATION + SOCIAL RELEVANCE</span><h2>Why it matters</h2><p>The proposal positions SignAR as an interactive learning and awareness tool intended to support inclusive education and reduce communication barriers between Deaf and non-Deaf individuals.</p><div class="sdg-list"><span>SDG 4</span><span>Quality Education</span><span>SDG 10</span><span>Reduced Inequalities</span><span>SDG 9</span><span>Industry, Innovation and Infrastructure</span></div></article>
         </div>
       </section>
     </main>
