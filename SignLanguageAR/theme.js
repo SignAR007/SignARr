@@ -86,6 +86,28 @@
     });
 
     updateButton();
+
+    // Provide main-app shortcuts; the private training toolkit is intentionally
+    // not part of the public Pages deployment, so link to its repository guide.
+    const mainNav = document.querySelector('.main-nav');
+    if (mainNav && !mainNav.querySelector('[data-signar-shortcut]')) {
+      const libraryLink = document.createElement('a');
+      libraryLink.className = 'nav-btn';
+      libraryLink.href = './library.html';
+      libraryLink.textContent = 'Sign library';
+      libraryLink.setAttribute('data-signar-shortcut', 'library');
+      mainNav.append(libraryLink);
+
+      const trainingLink = document.createElement('a');
+      trainingLink.className = 'nav-btn';
+      trainingLink.href = 'https://github.com/SignAR007/SignARr/tree/main/SignAR_FSL_Training_Tools_Video_Import_v5';
+      trainingLink.target = '_blank';
+      trainingLink.rel = 'noopener noreferrer';
+      trainingLink.textContent = 'Training guide';
+      trainingLink.setAttribute('data-signar-shortcut', 'training');
+      mainNav.append(trainingLink);
+    }
+
     if (storageReadFailed) announce('Using your system color mode; saved preferences are unavailable in this browser.');
   });
 })();
