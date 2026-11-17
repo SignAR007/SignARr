@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "featureVersion": "signar-fsl-456-v2",
+  "featureDimension": 456,
+  "samplesInExport": 13,
+  "validSamples": 4,
+  "excludedSamples": 9,
+  "distinctSigners": 4,
+  "readyForSignerIndependentTraining": false,
+  "labelCounts": {
+    "KAMUSTA KA": 4
+  },
+  "distinctSignersPerLabel": {
+    "KAMUSTA KA": 4
+  },
+  "samplesPerSigner": {
+    "signer-01": 1,
+    "signer-02": 1,
+    "signer-03": 1,
+    "signer-04": 1
+  },
+  "excludedReasons": {
+    "unknown_label": 9
+  },
+  "errors": [],
+  "warnings": [
+    "Single-label data can be trained, but cannot teach the model to distinguish signs.",
+    "Only 4 signer aliases are represented; evaluation may not generalize to unseen signers.",
+    "Some samples were not counted as evaluation-ready because of metadata or feature checks; the trainer can use structurally valid feature sequences."
+  ],
+  "nextStep": "Training can run with the structurally valid samples. Treat readiness and coverage warnings as deployment guidance; review evaluation and sign accuracy before deployment."
+}

@@ -1,0 +1,94 @@
+{
+  "project": "SignAR FSL Decoder",
+  "schemaVersion": 1,
+  "featureVersion": "signar-fsl-456-v2",
+  "trained": false,
+  "testMode": false,
+  "modelPath": "./model/model.json",
+  "sequenceLength": 30,
+  "samplingFps": 15,
+  "sampleWindowSeconds": 2,
+  "featureDimension": 456,
+  "outputClasses": 4,
+  "labels": [
+    "KAMUSTA KA",
+    "A",
+    "I LOVE YOU",
+    "PARO PARO"
+  ],
+  "featureSchema": {
+    "pose": {
+      "count": 33,
+      "valuesPerPoint": [
+        "x",
+        "y",
+        "z",
+        "visibility"
+      ],
+      "size": 132,
+      "missingPointVisibility": 0
+    },
+    "hands": {
+      "countPerHand": 21,
+      "valuesPerPoint": [
+        "bodyRelativeX",
+        "bodyRelativeY",
+        "bodyRelativeZ",
+        "wristRelativeX",
+        "wristRelativeY",
+        "wristRelativeZ"
+      ],
+      "handCount": 2,
+      "size": 252,
+      "missingValue": -3
+    },
+    "face": {
+      "pointCount": 24,
+      "valuesPerPoint": [
+        "x",
+        "y",
+        "z"
+      ],
+      "size": 72,
+      "missingValue": -3
+    },
+    "total": 456,
+    "normalization": {
+      "anchorFallbackOrder": [
+        "shouldersAndHips",
+        "shoulders",
+        "selectedFacePoints",
+        "partialUpperBody",
+        "visibleHands"
+      ],
+      "normalizedCoordinateRange": [
+        -2.5,
+        2.5
+      ],
+      "missingValueForHandAndFace": -3,
+      "missingValueInterpolation": "nearest-sample"
+    }
+  },
+  "evaluation": {
+    "signerIndependent": true,
+    "evaluationMeaningful": true,
+    "deploymentEligible": false,
+    "testAccuracy": 0.25,
+    "minimumAccuracy": 0.75,
+    "minimumClassRecall": 0.0,
+    "requiredClassRecall": 0.4,
+    "trainSigners": [
+      "signer-02",
+      "signer-04",
+      "signer-05"
+    ],
+    "validationSigners": [
+      "signer-03"
+    ],
+    "testSigners": [
+      "signer-01",
+      "signer-06"
+    ]
+  },
+  "note": "Review evaluation.json and confirm sign forms with FSL experts before deploying. Incomplete data can train a candidate but does not make it deployable."
+}

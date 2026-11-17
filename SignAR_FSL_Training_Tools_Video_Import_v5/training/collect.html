@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#286aa5">
+  <meta name="description" content="A guided, private workspace for collecting Filipino Sign Language training samples.">
+  <title>SignAR · FSL Sign Collection</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="collect.css">
+  <link rel="stylesheet" href="collect-theme.css">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="mark" aria-hidden="true">S</div><div><p class="overline">SIGNAR · LOCAL TRAINING</p><h1>Training studio</h1><p class="subhead">A private workspace for verified FSL samples.</p></div></div>
+      <div class="top-actions">
+        <button class="button theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode">Dark mode</button>
+        <span class="status" id="storageStatus">Opening local storage…</span>
+      </div>
+    </header>
+
+    <section class="studio-intro">
+      <div>
+        <p class="overline">FILIPINO SIGN LANGUAGE · SAMPLE COLLECTION</p>
+        <h2>Build a clearer sign library.</h2>
+        <p>Verify the sign, record a performance, then review your samples before training.</p>
+      </div>
+      <aside class="notice"><strong>Privacy first.</strong> Use an alias and get permission. Videos and landmarks stay in this browser until you choose to export them.</aside>
+    </section>
+
+    <section class="card workflow-card" aria-labelledby="workflowTitle">
+      <div class="workflow-intro">
+        <div><p class="overline">COLLECTION FLOW</p><h2 id="workflowTitle">From sign details to a trained candidate</h2></div>
+        <p class="workflow-status" id="workflowStatus" aria-live="polite">Start by entering the sign and signer details.</p>
+      </div>
+      <ol class="workflow-steps" aria-label="Collection progress">
+        <li class="workflow-step current" id="workflowStep1" aria-current="step"><span class="step-number" aria-hidden="true">1</span><span><strong>Prepare</strong><small>Label, verify, and get consent</small></span><span class="step-state">In progress</span></li>
+        <li class="workflow-step" id="workflowStep2"><span class="step-number" aria-hidden="true">2</span><span><strong>Frame</strong><small>Start camera or choose a clip</small></span><span class="step-state">Next</span></li>
+        <li class="workflow-step" id="workflowStep3"><span class="step-number" aria-hidden="true">3</span><span><strong>Collect</strong><small>Review the saved performance</small></span><span class="step-state">Next</span></li>
+        <li class="workflow-step" id="workflowStep4"><span class="step-number" aria-hidden="true">4</span><span><strong>Train</strong><small>Run the candidate when ready</small></span><span class="step-state">Next</span></li>
+      </ol>
+    </section>
+
+    <div class="workspace">
+      <section class="card form-card">
+        <div class="card-head"><div><p class="overline">PREPARE · SIGN DETAILS</p><h2>Describe the sign</h2><p class="microcopy">Use one verified sign label and one signer alias for each sample.</p></div></div>
+
+        <label>Signer alias <input id="signerId" value="signer-01" maxlength="40" autocomplete="off" placeholder="e.g. signer-01"></label>
+        <label>FSL sign label <input id="labelSelect" type="text" list="labelOptions" maxlength="40" autocomplete="off" placeholder="Choose or type a verified sign" aria-describedby="labelHelp"></label>
+        <datalist id="labelOptions"></datalist>
+        <p class="microcopy field-help" id="labelHelp">Choose a saved sign label or type a new one. Use the exact FSL sign performed, checked against an FSL reference.</p>
+        <label>Reference or reviewer <input id="verificationNotes" maxlength="200" required placeholder="e.g. FSL SignBank + teacher review" aria-describedby="notesHelp"></label>
+        <p class="microcopy field-help" id="notesHelp">A short note helps you remember how this sign was checked.</p>
+        <label class="checkline"><input id="verified" type="checkbox"><span>I checked this exact sign form with a reliable FSL reference and a qualified signer, teacher, or interpreter.</span></label>
+        <label class="checkline"><input id="consent" type="checkbox"><span>The signer gave informed permission for recording and local storage.</span></label>
+
+        <details class="import-panel">
+          <summary><span><strong>Already have a video?</strong><small>Import a clip instead of recording with the camera</small></span></summary>
+          <div class="import-content">
+            <p class="microcopy">Choose one clip with one sign by one signer. Very short clips can be saved when at least two usable landmark frames are found. The source video and landmarks are saved on this device automatically. MP4 or WebM works best.</p>
+            <label>Video clip <input id="importVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-m4v,.mp4,.webm,.mov,.m4v,.ogv" aria-describedby="importProgress"></label>
+            <p class="microcopy" id="importProgress" aria-live="polite">Choose a clip. If sign details or consent are missing, it will wait until they are complete.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="card camera-card">
+        <div class="card-head"><div><p class="overline">FRAME · CAPTURE</p><h2>Set up the signer</h2><p class="microcopy">Keep the signing hand and upper body in view. Full-body framing is not required.</p></div><span class="live-indicator" id="trackingStatus">Not started</span></div>
+        <div class="stage" id="stage">
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="landmarkCanvas"></canvas>
+          <div class="guide" id="guide"><div class="guide-shape"></div><p>Keep the signing region visible</p></div>
+          <div class="stage-label" id="stageLabel">Camera is off</div>
+        </div>
+        <div class="button-row">
+          <button class="button primary" id="startCamera">Start camera</button>
+          <button class="button" id="stopCamera" disabled>Turn camera off</button>
+        </div>
+        <p class="microcopy camera-help">Your browser may ask for camera permission. The preview is not sent anywhere.</p>
+        <div class="record-state" id="recordState"><span class="dot"></span><span>Not recording</span><span id="frameCounter">0 frames</span></div>
+        <label class="checkline auto-line"><input type="checkbox" id="autoCapture" aria-describedby="autoCaptureHelp"><span><strong>Hands-free capture</strong><small id="autoCaptureHelp">Optional: automatically start when a sign begins and save after you pause. Leave off for manual control.</small></span></label>
+        <div class="button-row capture-buttons"><button class="button primary" id="startRecording" disabled>Start recording</button><button class="button warning" id="stopRecording" disabled>Stop and save</button></div>
+        <p class="microcopy" id="captureHelp">Complete the sign details and start the camera to record a sample.</p>
+        <details class="diagnostics">
+          <summary>Camera troubleshooting</summary>
+          <p class="microcopy tracking-diagnostics" id="frameDiagnostics" aria-live="polite">Tracker diagnostics: waiting for camera results.</p>
+        </details>
+      </section>
+    </div>
+
+    <section class="card library-card">
+      <div class="card-head wrap"><div><p class="overline">COLLECT · REVIEW</p><h2>Your saved samples</h2><p class="subhead" id="sampleSummary">No samples yet. Each recording is saved only in this browser.</p></div>
+        <div class="button-row export-row"><button class="button" id="exportJson" disabled>Export landmark JSON</button><button class="button danger" id="deleteAll" disabled>Delete local samples</button></div>
+      </div>
+      <div class="sample-list" id="sampleList"><p class="empty">No samples yet. Saved samples will appear here.</p></div>
+    </section>
+
+    <section class="card training-card" aria-labelledby="trainingTitle">
+      <div class="card-head wrap">
+        <div><p class="overline">TRAIN · BROWSER CANDIDATE</p><h2 id="trainingTitle">Train when your samples are ready</h2><p class="subhead">Saving or importing samples does not start training. Choose <strong>Start Training</strong> when you are ready; the model candidate is saved in this browser.</p></div>
+      </div>
+      <div class="button-row"><button class="button primary" id="trainModel" disabled>Start Training</button><button class="button" id="tryModel" disabled>Try a sign</button></div>
+      <p class="training-message" id="trainingMessage" role="status" aria-live="polite">Save at least one labeled sample, then select Start Training. A single label can only score that sign; it cannot distinguish other signs.</p>
+      <p class="model-test-message" id="modelTestMessage" role="status" aria-live="polite">After training, start the camera and choose Try a sign. Perform one sign for about two seconds; this test is not saved to your collection.</p>
+      <div class="training-progress-wrap">
+        <div class="training-progress-label"><span id="trainingProgressLabel">Waiting for you to start</span><span id="trainingEpochCount">0 / 40 epochs</span></div>
+        <progress id="trainingProgress" max="100" value="0" aria-label="Model training progress"></progress>
+      </div>
+      <div class="training-metrics" aria-live="polite">
+        <div class="training-metric"><span>Training accuracy</span><strong id="trainingAccuracy">—</strong></div>
+        <div class="training-metric"><span>Training loss</span><strong id="trainingLoss">—</strong></div>
+        <div class="training-metric"><span>Validation accuracy</span><strong id="validationAccuracy">—</strong></div>
+        <div class="training-metric"><span>Validation loss</span><strong id="validationLoss">—</strong></div>
+      </div>
+      <p class="microcopy training-note">A completed run confirms the model was saved and reloaded, not that it learned to recognize signs. Try a fresh performance with the camera; for a meaningful check, test recordings from signers and performances not used for training. This candidate is not deployment-ready.</p>
+    </section>
+    <footer>Private collection on this device · Videos and landmarks are exported only when you choose.</footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../shared/fsl-features.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1675471629/holistic.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js" crossorigin="anonymous"></script>
+  <script src="browser-trainer.js"></script>
+  <script src="collect.js"></script>
+</body>
+</html>

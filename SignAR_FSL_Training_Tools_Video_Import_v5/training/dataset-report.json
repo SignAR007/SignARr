@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "featureVersion": "signar-fsl-456-v2",
+  "featureDimension": 456,
+  "samplesInExport": 25,
+  "validSamples": 25,
+  "excludedSamples": 0,
+  "distinctSigners": 5,
+  "readyForSignerIndependentTraining": true,
+  "labelCounts": {
+    "WORD_A": 5,
+    "WORD_B": 5,
+    "WORD_C": 5,
+    "WORD_D": 5,
+    "WORD_E": 5
+  },
+  "distinctSignersPerLabel": {
+    "WORD_A": 5,
+    "WORD_B": 5,
+    "WORD_C": 5,
+    "WORD_D": 5,
+    "WORD_E": 5
+  },
+  "samplesPerSigner": {
+    "signer-01": 5,
+    "signer-02": 5,
+    "signer-03": 5,
+    "signer-04": 5,
+    "signer-05": 5
+  },
+  "excludedReasons": {},
+  "errors": [],
+  "warnings": [],
+  "nextStep": "Run training/train_model.py only after this report says readyForSignerIndependentTraining=true and the sign forms have been independently reviewed."
+}
