@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#286aa5">
+  <meta name="description" content="Explore SignAR's proposed Filipino Sign Language vocabulary and validation status.">
+  <title>FSL Sign Library · SignAR</title>
+  <link rel="stylesheet" href="library.css">
+  <script src="library.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="SignAR home"><span class="brand-mark">S</span><span><strong>SignAR</strong><small>Filipino Sign Language</small></span></a>
+    <a class="back-link" href="./">Back to decoder</a>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">LEARN · EXPLORE · VERIFY</p>
+      <h1>FSL sign library</h1>
+      <p class="lead">A proposed starter vocabulary of 185 English–Filipino expressions, organized into 12 topics.</p>
+      <p class="notice"><strong>Important:</strong> These entries are vocabulary prompts, not verified FSL signs. A Filipino translation does not determine the sign. SignAR currently supports FSL only, and no sign in this proposed list should be treated as an approved gesture or recognition standard until reviewed by qualified FSL signers.</p>
+    </section>
+
+    <section class="toolbar" aria-label="Filter sign library">
+      <label class="search-label" for="search">Search signs
+        <input id="search" type="search" placeholder="Search English or Filipino" autocomplete="off">
+      </label>
+      <label for="category">Topic
+        <select id="category"><option value="all">All topics</option></select>
+      </label>
+      <p id="resultCount" class="result-count" aria-live="polite"></p>
+    </section>
+
+    <section id="signList" class="sign-list" aria-label="Proposed FSL vocabulary"></section>
+    <p id="emptyState" class="empty" hidden>No entries match your search. Try another word or topic.</p>
+
+    <section class="next-steps">
+      <h2>How gesture references and training will work</h2>
+      <ol>
+        <li><strong>Verify the sign first.</strong> Have a qualified FSL signer, teacher, or interpreter confirm the sign form and note regional or contextual variants.</li>
+        <li><strong>Add a reviewed visual reference.</strong> Each entry currently has no verified 2D pose, video, or landmark sample. Avoid using a generated illustration as authoritative instruction.</li>
+        <li><strong>Collect varied, consented examples.</strong> Use the private local training toolkit with multiple signers; a single recording is not a reliable standard.</li>
+        <li><strong>Evaluate before recognition.</strong> Test on signers excluded from training and keep the sign marked pending until the results and reference are reviewed.</li>
+      </ol>
+      <p>The existing collector is intentionally local and is not published as part of this public library. See the <a href="https://github.com/SignAR007/SignARr/tree/main/SignAR_FSL_Training_Tools_Video_Import_v5">training toolkit guide</a> to run it privately from your computer.</p>
+    </section>
+  </main>
+  <footer>SignAR is an experimental learning prototype—not a substitute for FSL instruction or an interpreter.</footer>
+</body>
+</html>
